@@ -18,8 +18,17 @@ menu.addEventListener("click", function (e) {
 order.addEventListener("click", function (e) {
   if (e.target.classList.contains("remove-btn")) {
     const itemId = Number(e.target.dataset.itemId);
-    cart = cart.filter((id) => id !== itemId);
-    render();
+    const targetItem = cart.find((item) => item.id === itemId);
+
+    if (targetItem) {
+      // ❓ FILL IN THE CONDITION: Check if quantity is greater than 1
+      if (targetItem.quantity > 1) {
+        targetItem.quantity--;
+      } else {
+        cart = cart.filter((item) => item.id !== itemId);
+      }
+      render();
+    }
   }
 });
 
@@ -42,10 +51,13 @@ function showSuccessPage() {
 }
 
 function addToOrder(itemId) {
-  if (cart.includes(itemId)) {
-    return;
+  const existingItem = cart.find((item) => item.id === itemId);
+
+  if (existingItem) {
+    existingItem.quantity++;
+  } else {
+    cart.push({ id: itemId, quantity: 1 });
   }
-  cart.push(itemId);
 
   if (cart.length > 0) {
     order.classList.remove("hidden");
@@ -61,13 +73,13 @@ function getOrderHtml() {
 
   // 1. 生成訂單列表 HTML
   const orderItemsHtml = cart
-    .map((itemId) => {
-      const item = menuArray.find((menuItem) => menuItem.id === itemId);
+    .map((cartItem) => {
+      const item = menuArray.find((menuItem) => menuItem.id === cartItem.id);
       if (!item) return "";
 
       return `
         <div class="order-item">
-            <h3>${item.emoji} ${item.name}</h3>
+            <h3>${item.emoji} ${item.name} x ${cartItem.quantity}</h3>
             <button class="remove-btn" data-item-id="${item.id}">remove</button>
             <p class="item-price">$${item.price}</p>
         </div>
@@ -75,18 +87,19 @@ function getOrderHtml() {
     })
     .join("");
 
-  const totalPrice = cart.reduce((total, itemId) => {
-    const item = menuArray.find((menuItem) => menuItem.id === itemId);
-    return item ? total + item.price : total;
+  const totalPrice = cart.reduce((total, cartItem) => {
+    const item = menuArray.find((menuItem) => menuItem.id === cartItem.id);
+    return item ? total + cartItem.quantity * item.price : total;
   }, 0);
 
-  // 有嘢食先加總金額
+  // 第二步：將算好嘅 totalPrice 放入 HTML 樣板
   return `
-            <div class="cart-total">
-                <strong>Total Price:</strong>
-                <span>$${totalPrice.toFixed(2)}</span>
-            </div>
-        `;
+    ${orderItemsHtml}
+    <div class="cart-total">
+        <strong>Total Price:</strong>
+        <span>$${totalPrice.toFixed(2)}</span>
+    </div>
+  `;
 }
 
 function getMenuHtml() {
