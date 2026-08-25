@@ -1,36 +1,42 @@
 <html>
-    <head>
-       <link rel="stylesheet" href="index.css">
-       <link rel="preconnect" href="https://fonts.googleapis.com">
-       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-       <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,200;1,14..32,200&family=Smythe&display=swap" rel="stylesheet">
-    </head>
-    <body>
-        <header>
-            <h1>Jimmy’s Diner</h1>
-            <p class="title-text">The best burgers and pizzas in town.</p>
-        </header>
-        
-        <main>
-            <div id="menu">  
-            </div>
-            <div id="order" class="order hidden">
-                <h2>Your Order</h2>
-                <div id="order-inner"></div>
-                <hr>
-                <button id="order-btn" class="order-btn">Complete Order</button>
-</div>
-        </main>
-        <div class="modal hidden" id="modal">
-            <h2 class="modal-text">Enter Card Details</h2>
-            <form id="payment-form">
-                <input type="text" name="name" placeholder="Enter your name" required>
-                <input type="text" name="card-number" placeholder="Enter card number" required>
-                <input type="text" name="cvv" placeholder="Enter CVV" required>
-                <button id="pay-btn" class="pay-btn">Pay</button>
-            </form>
-        </div>
-	<script src="index.js" type="module"></script>
-    </body>
-</html>
+  <head>
+    <link rel="stylesheet" href="index.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,200;1,14..32,200&family=Smythe&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header>
+      <h1>Jimmy’s Diner</h1>
+      <p class="title-text">The best burgers and pizzas in town.</p>
+    </header>
 
+    <main>
+      <div id="menu"></div>
+      <div id="order" class="order hidden">
+        <h2>Your Order</h2>
+        <div id="order-inner"></div>
+        <hr />
+        <button id="order-btn" class="order-btn">Complete Order</button>
+      </div>
+    </main>
+    <div class="modal hidden" id="modal">
+      <form id="payment-form">
+        <h2 class="modal-text">Enter Card Details</h2>
+        <input type="text" name="name" placeholder="Enter your name" required />
+        <input
+          type="text"
+          name="card-number"
+          placeholder="Enter card number"
+          required
+        />
+        <input type="text" name="cvv" placeholder="Enter CVV" required />
+        <button id="pay-btn" class="pay-btn">Pay</button>
+      </form>
+    </div>
+    <script src="index.js" type="module"></script>
+  </body>
+</html>
