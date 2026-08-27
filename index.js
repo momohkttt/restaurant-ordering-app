@@ -5,6 +5,7 @@ const order = document.getElementById("order");
 const form = document.getElementById("payment-form");
 const modal = document.getElementById("modal");
 const orderBtn = document.getElementById("order-btn");
+const closeBtn = document.getElementById("close-btn");
 
 let cart = [];
 
@@ -41,6 +42,16 @@ form.addEventListener("submit", function (e) {
 
 orderBtn.addEventListener("click", function () {
   modal.classList.remove("hidden");
+});
+
+closeBtn.addEventListener("click", function () {
+  modal.classList.add("hidden");
+});
+
+modal.addEventListener("click", function (e) {
+  if (e.target === modal) {
+    modal.classList.add("hidden");
+  }
 });
 
 function showSuccessPage() {
