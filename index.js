@@ -39,6 +39,7 @@ form.addEventListener("submit", function (e) {
   e.preventDefault();
   modal.classList.add("hidden");
   cart = [];
+  form.reset();
   showSuccessPage();
 });
 
