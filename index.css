@@ -1,10 +1,13 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0 auto;
   padding: 0 16px; /* 加左右 padding 畀手機舒服啲 */
   font-family: "Smythe", system-ui, sans-serif;
   max-width: 600px; /* 用 max-width 代替 width，唔會爆手機 */
   min-height: 100vh; /* 確保 body 至少填滿畫面 */
-  box-sizing: border-box;
 }
 
 h1 {
@@ -97,10 +100,6 @@ hr {
   border: none;
 }
 
-.hidden {
-  display: none;
-}
-
 .order h2 {
   text-align: center;
 }
@@ -119,7 +118,8 @@ hr {
 
 .order-btn {
   display: block;
-  width: 508px;
+  width: 100%;
+  max-width: 508px;
   height: 60px;
   margin: 53px auto;
   background-color: #16db99;
@@ -198,12 +198,17 @@ input::placeholder {
 }
 
 .thank-you-msg {
-  width: 504px;
-  height: 120px;
+  max-width: 504px;
+  min-height: 120px;
   display: flex;
   background-color: #ecfdf5;
   color: #065f46;
   justify-content: center;
   align-items: center;
   margin: 50px auto;
+  padding: 10px;
+}
+
+.hidden {
+  display: none;
 }
