@@ -70,10 +70,6 @@ function addToOrder(itemId) {
     cart.push({ id: itemId, quantity: 1 });
   }
 
-  if (cart.length > 0) {
-    order.classList.remove("hidden");
-  }
-
   render();
 }
 
@@ -134,6 +130,12 @@ function getMenuHtml() {
 function render() {
   menu.innerHTML = getMenuHtml();
   document.getElementById("order-inner").innerHTML = getOrderHtml();
+
+  if (cart.length === 0) {
+    order.classList.add("hidden");
+  } else {
+    order.classList.remove("hidden");
+  }
 }
 
 render();
