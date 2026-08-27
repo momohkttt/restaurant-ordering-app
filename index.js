@@ -6,6 +6,8 @@ const form = document.getElementById("payment-form");
 const modal = document.getElementById("modal");
 const orderBtn = document.getElementById("order-btn");
 const closeBtn = document.getElementById("close-btn");
+const thankYouMsg = document.getElementById("thank-you-msg");
+const orderDetails = document.getElementById("order-details");
 
 let cart = [];
 
@@ -57,8 +59,9 @@ modal.addEventListener("click", function (e) {
 function showSuccessPage() {
   const paymentFormData = new FormData(form);
   const name = paymentFormData.get("name");
-  document.getElementById("order-inner").innerHTML =
-    `<h2 class="thank-you-msg">Thanks ${name}! Your order is on its way!</h2>`;
+  orderDetails.classList.add("hidden");
+  thankYouMsg.innerHTML = `<h2 class="thank-you-msg">Thanks ${name}! Your order is on its way!</h2>`;
+  thankYouMsg.classList.remove("hidden");
 }
 
 function addToOrder(itemId) {
@@ -71,6 +74,8 @@ function addToOrder(itemId) {
   }
 
   render();
+  orderDetails.classList.remove("hidden");
+  thankYouMsg.classList.add("hidden");
 }
 
 function getOrderHtml() {
