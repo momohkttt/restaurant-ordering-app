@@ -19,18 +19,31 @@ menu.addEventListener("click", function (e) {
 });
 
 order.addEventListener("click", function (e) {
-  if (e.target.classList.contains("remove-btn")) {
-    const itemId = Number(e.target.dataset.itemId);
-    const targetItem = cart.find((item) => item.id === itemId);
+  // 1. 抓取被點擊元素的 data-action 同 data-item-id
+  const action = e.target.dataset.action;
+  const itemId = Number(e.target.dataset.itemId);
 
-    if (targetItem) {
+  // 如果點擊嘅位置冇 data-action（例如點到空白處或食物名），直接結束
+  if (!action) return;
+
+  // 2. 喺 cart 入面尋找對應嘅商品
+  const targetItem = cart.find((item) => item.id === itemId);
+
+  if (targetItem) {
+    if (action === "increase") {
+      targetItem.quantity++;
+    } else if (action === "decrease") {
       if (targetItem.quantity > 1) {
         targetItem.quantity--;
       } else {
         cart = cart.filter((item) => item.id !== itemId);
       }
-      render();
+    } else if (action === "delete") {
+      cart = cart.filter((item) => item.id !== itemId);
     }
+
+    // 3. 重新渲染畫面
+    render();
   }
 });
 
@@ -91,16 +104,24 @@ function getOrderHtml() {
 
       return `
         <div class="order-item">
-            <h3>${item.emoji} ${item.name} x ${cartItem.quantity}</h3>
-            <div class="quantity-controls">
-            <button class="adjust-btn" data-action="decrease" data-item-id="${item.id}">-</button>
-        <span class="item-quantity">${cartItem.quantity}</span>
-        <button class="adjust-btn" data-action="increase" data-item-id="${item.id}">+</button>
-         <button class="remove-btn" data-item-id="${item.id}">remove</button>
-            <p class="item-price">$${item.price}</p>
-    </div>
+  <!-- 左邊：食物名稱 -->
+  <div class="order-item-title">
+    <span>${item.emoji} ${item.name}</span>
+  </div>
 
-        </div>
+  <!-- 中間：數量控制（加減按鈕 + 數量 + remove） -->
+  <div class="quantity-controls">
+    <button class="adjust-btn" data-action="decrease" data-item-id="${item.id}">-</button>
+    <span class="item-quantity">${cartItem.quantity}</span>
+    <button class="adjust-btn" data-action="increase" data-item-id="${item.id}">+</button>
+    <button class="remove-btn" data-action="delete" data-item-id="${item.id}">remove</button>
+  </div>
+
+  <!-- 右邊：價錢 -->
+  <div class="order-item-price">
+    $${(item.price * cartItem.quantity).toFixed(2)}
+  </div>
+</div>
     `;
     })
     .join("");

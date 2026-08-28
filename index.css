@@ -112,6 +112,48 @@ hr {
   gap: 10px;
 }
 
+.order-item {
+  display: grid;
+  /* 第一欄（食物名）自動拉伸，第二欄（控制區）同第三欄（價錢）按內容固定寬度 */
+  grid-template-columns: 1fr auto auto;
+  align-items: center;
+  gap: 16px; /* 欄與欄之間的固定間距 */
+  margin-bottom: 16px;
+}
+
+.order-item-price {
+  text-align: right;
+  min-width: 60px; /* 給價錢一個固定最小寬度 */
+}
+
+.quantity-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* 元素之間的間距 */
+}
+
+.adjust-btn {
+  background-color: transparent;
+  border: 1.5px solid #333;
+  border-radius: 50%; /* 圓形按鈕 */
+  width: 24px;
+  height: 24px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease;
+}
+
+.item-quantity {
+  font-weight: bold;
+  font-size: 16px;
+  min-width: 16px;
+  text-align: center;
+}
+
 .item-price {
   margin-left: auto;
 }
@@ -143,11 +185,20 @@ hr {
 }
 
 .remove-btn {
-  background: none;
-  border: none;
-  font-family: Verdana;
-  font-size: 0.75rem;
-  color: #555555;
+  .remove-btn {
+    background: none;
+    border: none;
+    color: #888;
+    font-size: 12px;
+    font-style: italic;
+    cursor: pointer;
+    margin-left: 4px;
+  }
+}
+
+.remove-btn:hover {
+  color: #e74c3c; /* Hover 時變紅色 */
+  text-decoration: underline;
 }
 
 .modal {
