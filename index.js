@@ -24,7 +24,6 @@ order.addEventListener("click", function (e) {
     const targetItem = cart.find((item) => item.id === itemId);
 
     if (targetItem) {
-      // ❓ FILL IN THE CONDITION: Check if quantity is greater than 1
       if (targetItem.quantity > 1) {
         targetItem.quantity--;
       } else {
@@ -93,8 +92,14 @@ function getOrderHtml() {
       return `
         <div class="order-item">
             <h3>${item.emoji} ${item.name} x ${cartItem.quantity}</h3>
-            <button class="remove-btn" data-item-id="${item.id}">remove</button>
+            <div class="quantity-controls">
+            <button class="adjust-btn" data-action="decrease" data-item-id="${item.id}">-</button>
+        <span class="item-quantity">${cartItem.quantity}</span>
+        <button class="adjust-btn" data-action="increase" data-item-id="${item.id}">+</button>
+         <button class="remove-btn" data-item-id="${item.id}">remove</button>
             <p class="item-price">$${item.price}</p>
+    </div>
+
         </div>
     `;
     })

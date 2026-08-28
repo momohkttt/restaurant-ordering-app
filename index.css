@@ -128,14 +128,17 @@ hr {
 }
 
 .order-btn:hover,
-.order-btn:focus {
+.order-btn:focus,
+.pay-btn:hover,
+.pay-btn:focus {
   background-color: #612222;
   color: #fff;
   font-size: 1rem;
   transform: scale(0.95);
 }
 
-.order-btn:active {
+.order-btn:active,
+.pay-btn:active {
   transform: scale(0.95) translateY(2px);
 }
 
