@@ -31,14 +31,33 @@
       <form id="payment-form">
         <button type="button" class="close-btn" id="close-btn">&times;</button>
         <h2 class="modal-text">Enter Card Details</h2>
-        <input type="text" name="name" placeholder="Enter your name" required />
+        <input
+          type="text"
+          name="name"
+          placeholder="Enter your name"
+          pattern="[A-Za-z\s]+"
+          minlength="2"
+          required
+        />
         <input
           type="text"
           name="card-number"
           placeholder="Enter card number"
+          maxlength="16"
+          inputmode="numeric"
+          pattern="\d{16}"
+          maxlength="16"
           required
         />
-        <input type="text" name="cvv" placeholder="Enter CVV" required />
+        <input
+          type="text"
+          name="cvv"
+          placeholder="Enter CVV"
+          inputmode="numeric"
+          required
+          pattern="\d{3}"
+          maxlength="3"
+        />
         <button id="pay-btn" class="pay-btn">Pay</button>
       </form>
     </div>
