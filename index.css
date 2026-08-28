@@ -29,7 +29,7 @@ h2 {
 }
 
 header {
-  background-image: url("/header-img.png");
+  background-image: url("./header-img.png");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
